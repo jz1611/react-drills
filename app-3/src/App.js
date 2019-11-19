@@ -19,10 +19,13 @@ class App extends Component {
   }
 
   render() {
+    let filtered = this.state.list.filter(val => val.includes(this.state.userInput));
+    let toDisplay = filtered.map((val, index) => <li key={index}>{val}</li>);
+
     return (
       <div>
         <input onChange={(event) => this.updateUserInputAndFiltered(event.target.value)} />
-        <ul>{this.state.list.filter(val => val.includes(this.state.userInput)).map((val, index) => <li key={index}>{val}</li>)}</ul>
+        <ul>{toDisplay}</ul>
       </div>
     )
   }
