@@ -16,7 +16,6 @@ class App extends Component {
     this.setState({
       text: val
     });
-    console.log(this.state.text)
   }
 
   render() {
