@@ -1,18 +1,43 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
+import Todo from './Todo';
 import "./App.css";
 
 class App extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      newTask: "",
+      tasks: []
+    }
+
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleChange(event){
+    this.setState({
+      newTask: event.target.value
+    });
+  }
+
+  handleClick(){
+    this.setState({
+      tasks: [...this.state.tasks, this.state.newTask],
+      newTask: ""
+    });
+  }
+
   render() {
+    let tasks = this.state.tasks.map((task, index) => {
+      return <Todo key={index} task={task} />
+    })
+
     return (
       <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>My to-do list:</h1>
+        <input value={this.state.newTask} onChange={(event) => this.handleChange(event)}/>
+        <button onClick={this.handleClick}>Add</button>
+        {tasks}
       </div>
     );
   }
